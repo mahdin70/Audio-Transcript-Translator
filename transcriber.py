@@ -1,10 +1,9 @@
-from openai import OpenAI
+import openai
 import tempfile
 import os
 from dotenv import load_dotenv
 
 load_dotenv()
-client = OpenAI()
 
 def transcribe_audio(audio_file):
     try:
@@ -19,7 +18,7 @@ def transcribe_audio(audio_file):
             temp_file_path = temp_file.name
 
         with open(temp_file_path, "rb") as file:
-            transcription = client.audio.transcriptions.create(
+            transcription = openai.audio.transcriptions.create(
                 model="whisper-1",
                 file=file,
                 response_format="text"
